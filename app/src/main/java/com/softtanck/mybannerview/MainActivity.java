@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 //        } catch (Exception e) {
 //            Log.d("Tanck", "", e);
 //        }
+        
     }
 
 
