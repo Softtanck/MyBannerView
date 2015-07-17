@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.softtanck.mybannerview.fragment.OneFragment;
+import com.softtanck.mybannerview.fragment.ThreeFragment;
 import com.softtanck.mybannerview.fragment.TwoFragment;
 
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 changeFragment(new TwoFragment());
                 break;
             case R.id.three:
-                changeFragment(new TwoFragment());
+                changeFragment(new ThreeFragment());
                 break;
         }
     }
