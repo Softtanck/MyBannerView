@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -30,7 +31,7 @@ import java.util.List;
  * @Description : TODO
  * @date 7/17/2015
  */
-public class OneFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class OneFragment extends Fragment implements ViewPager.OnPageChangeListener, View.OnTouchListener {
 
     private ViewPager viewPager;
     private List<ImageView> list;
@@ -71,6 +72,7 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
         currentItem = currentItem - ((Integer.MAX_VALUE / 2) % list.size());
         viewPager.setCurrentItem(currentItem);
         viewPager.setOnPageChangeListener(this);
+        viewPager.setOnTouchListener(this);
         drawPoint();
         handler.sendEmptyMessageDelayed(++currentItem, 3000);
 
@@ -120,5 +122,10 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return true;
     }
 }

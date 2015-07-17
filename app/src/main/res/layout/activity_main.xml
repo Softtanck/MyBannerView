@@ -14,24 +14,27 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1.0"
+            android:background="#55885500"
             android:gravity="center"
-            android:text="sss" />
+            android:text="导航1" />
 
         <TextView
             android:id="@+id/two"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1.0"
+            android:background="#55885500"
             android:gravity="center"
-            android:text="sss" />
+            android:text="导航2" />
 
         <TextView
             android:id="@+id/three"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1.0"
+            android:background="#55885500"
             android:gravity="center"
-            android:text="sss" />
+            android:text="导航3" />
 
 
     </LinearLayout>
