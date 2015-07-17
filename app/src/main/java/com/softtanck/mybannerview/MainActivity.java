@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 //        } catch (Exception e) {
 //            Log.d("Tanck", "", e);
 //        }
-        
+
     }
 
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         paint.setStyle(Paint.Style.FILL); // 实心
         for (int i = 0; i < list.size(); i++) {
             paint.setColor(Color.GRAY);
-            if (currentIndex == i) // 设置选中项为红色
+            if (currentIndex == i) // 设置选中项为白色
                 paint.setColor(Color.WHITE);
             canvas.drawCircle(radius + spacing * i, radius, radius, paint);
         }
