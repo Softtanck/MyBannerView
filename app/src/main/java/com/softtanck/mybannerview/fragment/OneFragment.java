@@ -75,7 +75,7 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
         viewPager.setCurrentItem(currentItem);
         viewPager.setOnPageChangeListener(this);
         viewPager.setOnTouchListener(this);
-        new ViewpagerScroll(view.getContext(), viewPager);
+        new ViewpagerScroll(view.getContext(), viewPager, 1500);
         drawPoint();
         handler.sendEmptyMessageDelayed(++currentItem, 3000);
     }
