@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.one:
-                changeFragment(new OneFragment());
-                break;
-            case R.id.two:
-                changeFragment(new TwoFragment());
-                break;
-            case R.id.three:
-                changeFragment(new ThreeFragment());
-                break;
+//                changeFragment(new OneFragment());
+//                break;
+//            case R.id.two:
+//                changeFragment(new TwoFragment());
+//                break;
+//            case R.id.three:
+//                changeFragment(new ThreeFragment());
+//                break;
         }
     }
 }

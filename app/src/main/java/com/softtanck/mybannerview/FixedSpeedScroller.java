@@ -6,7 +6,7 @@ import android.widget.Scroller;
 
 /**
  * @author : Tanck
- * @Description : TODO
+ * @Description : TODO ·ÏÆúµôÁË.
  * @date 7/15/2015
  */
 public class FixedSpeedScroller extends Scroller {

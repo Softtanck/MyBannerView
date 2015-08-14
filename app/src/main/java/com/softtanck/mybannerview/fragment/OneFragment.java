@@ -15,14 +15,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 
-import com.softtanck.mybannerview.FixedSpeedScroller;
 import com.softtanck.mybannerview.R;
 import com.softtanck.mybannerview.adapter.MyPagerAdapter;
+import com.softtanck.mybannerview.view.ViewpagerScroll;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +38,17 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
     private ImageView imageView;
     private int currentIndex;
 
+    private boolean isTouch;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            viewPager.setCurrentItem(msg.what);
-            handler.sendEmptyMessageDelayed(++msg.what, 3000);
+            if (!isTouch)
+                viewPager.setCurrentItem(currentItem++);
+            handler.sendEmptyMessageDelayed(currentItem, 3000);
         }
     };
+    private int currentItem;
 
     @Nullable
     @Override
@@ -68,40 +70,29 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
         }
         adapter = new MyPagerAdapter(list);
         viewPager.setAdapter(adapter);
-        int currentItem = Integer.MAX_VALUE / 2;
+        currentItem = Integer.MAX_VALUE / 2;
         currentItem = currentItem - ((Integer.MAX_VALUE / 2) % list.size());
         viewPager.setCurrentItem(currentItem);
         viewPager.setOnPageChangeListener(this);
         viewPager.setOnTouchListener(this);
+        new ViewpagerScroll(view.getContext(), viewPager);
         drawPoint();
         handler.sendEmptyMessageDelayed(++currentItem, 3000);
-
-        try {
-            Field field = ViewPager.class.getDeclaredField("mScroller");
-            field.setAccessible(true);
-            FixedSpeedScroller scroller = new FixedSpeedScroller(viewPager.getContext(),
-                    new AccelerateInterpolator());
-            field.set(viewPager, scroller);
-            scroller.setmDuration(500);
-        } catch (Exception e) {
-            Log.d("Tanck", "", e);
-        }
-
     }
 
 
     private void drawPoint() {
-        int radius = 10; // °ë¾¶
-        int spacing = 50; // µãÖ®¼ä¼ä¸ô
+        int radius = 10; // åŠå¾„
+        int spacing = 50; // ç‚¹ä¹‹é—´é—´éš”
         Bitmap points = Bitmap.createBitmap(radius * 2 + spacing * (list.size() - 1), radius * 2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas();
         canvas.setBitmap(points);
         Paint paint = new Paint();
-        paint.setAntiAlias(true); // ÉèÖÃ»­±ÊÎªÎŞ¾â³İ
-        paint.setStyle(Paint.Style.FILL); // ÊµĞÄ
+        paint.setAntiAlias(true); // è®¾ç½®ç”»ç¬”ä¸ºæ— é”¯é½¿
+        paint.setStyle(Paint.Style.FILL); // å®å¿ƒ
         for (int i = 0; i < list.size(); i++) {
             paint.setColor(Color.GRAY);
-            if (currentIndex == i) // ÉèÖÃÑ¡ÖĞÏîÎª°×É«
+            if (currentIndex == i) // è®¾ç½®é€‰ä¸­é¡¹ä¸ºç™½è‰²
                 paint.setColor(Color.WHITE);
             canvas.drawCircle(radius + spacing * i, radius, radius, paint);
         }
@@ -115,7 +106,8 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
 
     @Override
     public void onPageSelected(int position) {
-        currentIndex = position % list.size();
+        currentItem = position;//å‡ä½ç½®æ›´æ–°
+        currentIndex = position % list.size();//çœŸå®ä½ç½®
         drawPoint();
     }
 
@@ -126,6 +118,15 @@ public class OneFragment extends Fragment implements ViewPager.OnPageChangeListe
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        return true;
+        int action = event.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                isTouch = true;
+                break;
+            case MotionEvent.ACTION_UP:
+                isTouch = false;
+                break;
+        }
+        return false;
     }
 }

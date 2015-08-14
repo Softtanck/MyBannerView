@@ -22,14 +22,14 @@ public class MyPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        position=position%mlist.size();
+        position = position % mlist.size();
         container.addView(mlist.get(position));
         return mlist.get(position);
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        position=position%mlist.size();
+        position = position % mlist.size();
         container.removeView(mlist.get(position));
     }
 
